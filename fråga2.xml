@@ -1,0 +1,53 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<patienter>
+    <patient>
+        <personnummer>199801121234</personnummer>
+        <diagnoser>  
+            
+            <diagnos>
+                <diagnosgrund> PAD </diagnosgrund>
+                <datum> "datum"  <datum>
+            </diagnos>
+            <diagnos>
+                <diagnosgrund> klinisk </diagnosgrund>
+                <datum> "datum" <datum>
+            </diagnos>
+            
+            <!-- En patient kan få cancer flera gånger -->
+        </diagnoser>
+
+        <behandlingar>
+
+            <behandling>
+                <typ> kirurgi  </typ>
+                <datum> "datum" <datum>
+                <operationskoder>
+                    <operationskod> HEJ123 <operationskod>
+                    <operationskod> DÅ4567 <operationskod>
+                </operationskoder>  
+            <behandling>
+            
+            <behandling>
+                <typ> strålbehandling </typ>
+                <datum> "datum" <datum>
+                <operationskoder>
+                </operationskoder>
+            <behandling>
+            
+            <!-- Kan finnas mer behandlingar -->
+        </behandlingar>
+
+        <allaTillstånd>
+        
+            <tillstånd>
+                <datum> "datum" </datum>
+                <ecog> 5 </ecog>
+            <tillstånd>
+            
+             <!-- Kan finnas mer tillstånd -->
+        <allaTillstånd>
+    </patient>
+
+    <!-- Kan finnas mer patienter -->
+    
+</patienter>
