@@ -32,7 +32,7 @@ function Canceranmälan(patientIndex, patienter){
     let anmälan = <div>
         <h4>Patiente {getId(patient)} diagnos datum är:</h4>
             {getDatum(patient)}
-            <h4>Patiente {getId(patient)} högsta ECOG värde är</h4>
+            <h4>Patiente {getId(patient)} högsta ECOG värde är:</h4>
             {getMaxECOG(patient)}
          </div>
 
