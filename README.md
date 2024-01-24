@@ -3,7 +3,7 @@
 Fråga 1-3 finns i PDF:en
 
 För uppgift 4-6 starta programet genom att köra 
-"npm start" när du står i mappen fraga3-6
+"npm install; npm start" när du står i mappen fraga3-6
 
 Du kan lägga till patienter genom att skriva en en nytt personnummer. 
 När du har minst en patient kan du börja lägga till data till den personen.
