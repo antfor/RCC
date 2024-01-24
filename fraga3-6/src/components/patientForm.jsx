@@ -9,63 +9,98 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import DiagnosForm from './diagnos.jsx';
 import TillståndForm from './tillstånd.jsx';
 import BehandlingForm from './behandling.jsx';
-import OprationsKod from './kirurgi.jsx';
-import {Behandling,DiagnosGrund,createPatient, createDiagnos, createTillsånd, createBehandling} from './fråga3.js';
+import FormTabs from './tabs.jsx';
+import * as inca from './fråga3.mjs';
 
 function LoadPatient(){
 
 }
-function addPatient(personnummer){
-
-  createPatient(personnummer);
+function handleNyPatient(personnummer, setPatienter){
+  // todo validation
+  let nyPatient = inca.createPatient(personnummer);
+  inca.tryAddPatient(nyPatient, setPatienter);
 
 }
 
-function patientForm() {
-  return (
 
+function getPatientOptions(patienter){
+  return patienter.map(
+      (p,i) => <option key={i}  value={i}> {p.personNr} </option>);
 
+}
+
+function isEmpty (array){
+  return array === undefined || array.length == 0;
+}
+
+function getContent(patient, patienter, setPatienter){
+
+  let tabs = FormTabs(patient, patienter, setPatienter);
+
+  if(noPationsExist){
+    return <h1>Lägg till en patient först</h1>
+  }else{
+    return tabs;
+  }
+
+}
+
+let noPationsExist = true;
+
+function PatientForm() {
+
+  const [patienter, setPatienter] = useState([]); 
+  const [patientIndex, setPatientIndex] = useState(0); 
+  const [validated, setValidated] = useState(false);
+  
+
+  const handleSubmit = (event) => {
+      const form = event.currentTarget;
+      event.preventDefault();
+
+      if (form.checkValidity() === false) {
+        event.stopPropagation();
+      }else{
+        handleNyPatient(form.inputPersonnummer.value, setPatienter);
+      }
+      
+      setValidated(true);
+    };
+
+  noPationsExist = isEmpty(patienter);
+ 
+
+  return(
     <div>
-      <Form>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
 
-        <Form.Label>Skapa ny Patient:</Form.Label>
+        <Form.Label>Lägg till ny Patient:</Form.Label>
         <InputGroup hasValidation className="mb-3">
 
           
-          <Form.Control required pattern = "[0-9]{6}[-]?[0-9]{4}" maxLength={11}  type="input" placeholder="ååmmdd-xxxx" />
+          <Form.Control required pattern = "[0-9]{6}[\-]?[0-9]{4}" maxLength={11}  
+                        type="input" placeholder="ååååmmdd-xxxx" 
+                        id="inputPersonnummer"
+                        onChange={(e) => {setValidated(false)}}/>
        
-          <Button variant="outline-success" id="button-addon" 
-                onClick={(e) => addPatient(1)}>
+          <Button type="submit" variant="outline-success" id="button-addon">
             Lägg till
           </Button>
         </InputGroup>
+      </Form>
+      <Form>
 
         <Form.Label>Välj Patient:</Form.Label>
-        <Form.Select value="hej" onChange={e => e.currentTarget.value}>
-                    {<option value="hej">hej</option>}
+        <Form.Select disabled={noPationsExist} 
+          onChange={e => {setPatientIndex(e.currentTarget.value);}}>
+                    {getPatientOptions(patienter)}
         </Form.Select>
       </Form>
-
-      <Tabs
-        defaultActiveKey="diagnos"
-        id="tab-example"
-        className="mb-3"
-      >
-        <Tab eventKey="diagnos" title="Diagnoser">
-          {DiagnosForm()}
-        </Tab>
-        <Tab eventKey="behandling" title="Behandlingar">
-          {TillståndForm()}
-        </Tab>
-        <Tab eventKey="tillstånd" title="Tillstånd">
-          {BehandlingForm()}
-        </Tab>
-        <Tab eventKey="canceranmälan" title="Canceranmälan" disable>
-          TODO
-        </Tab>
-      </Tabs>
+   
+      {getContent(patientIndex, patienter, setPatienter)}
+      
     </div>
   );
 }
 
-export default patientForm;
+export default PatientForm;

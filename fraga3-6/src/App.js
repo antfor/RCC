@@ -3,25 +3,24 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React, { useState } from "react";
-import BasicExample from './components/patientForm.jsx';
+
 import DiagnosForm from './components/diagnos.jsx';
 import TillståndForm from './components/tillstånd.jsx';
 import BehandlingForm from './components/behandling.jsx';
 import OprationsKod from './components/kirurgi.jsx';
-import patientForm from './components/patientForm.jsx';
+import PatientForm from './components/patientForm.jsx';
 
 function App() {
-  
-  
  // 
  return (
   //DiagnosForm()
   //TillståndForm()
   //BehandlingForm()
   //OprationsKod(codes, setCodes, false)
-  patientForm()
+  PatientForm()
 );
   /*
+  onClick={(e) => handleNyPatient(nyPatient,setPatienter)}
   return (
     <div className="App">
       <header className="App-header">

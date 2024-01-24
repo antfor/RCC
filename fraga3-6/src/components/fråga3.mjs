@@ -26,22 +26,19 @@ const tillsånd = {
 const behandling = {
     typ,
     datum,
-    oprationskoder // Array av oprationskod objekt
+    oprationskoder // Array av oprationskoder
 };
 
-const oprationskod = {
-    kod
-};
 */
 
-const DiagnosGrund = {
+export const DiagnosGrund = {
     PAD: 'PAD',
     CYTOLOGI: 'cytologi',
     RÖNTGEN: 'röntgen',
     KLINISK: 'klinisk'
 };
 
-const Behandling = {
+export const Behandling = {
     CYTO: 'cytostatikabehandling',
     STRÅL: 'strålbehandling',
     KIRURGI: 'kirurgi'
@@ -49,6 +46,7 @@ const Behandling = {
 
 
 window.inca = createIncaObject();
+
 
 function createIncaObject(patienterList = []){
     const IncaObject = {
@@ -58,7 +56,7 @@ function createIncaObject(patienterList = []){
     return IncaObject;
 }
 
-function createPatient(personNr, diagnoser = [], behandlingar = [], alltillsånd = []){
+export function createPatient(personNr, diagnoser = [], behandlingar = [], alltillsånd = []){
     const Patient = {
         personNr: personNr, 
         diagnoser: diagnoser, 
@@ -69,7 +67,7 @@ function createPatient(personNr, diagnoser = [], behandlingar = [], alltillsånd
     return Patient;
 }
 
-function createDiagnos(diagnosgrund, datum){
+export function createDiagnos(datum, diagnosgrund){
     const diagnos = {
         diagnosgrund: diagnosgrund,
         datum: datum
@@ -78,7 +76,7 @@ function createDiagnos(diagnosgrund, datum){
     return diagnos;
 }
 
-function createTillsånd(datum, ecog){
+export function createTillsånd(datum, ecog){
     const tillsånd = {
         datum: datum,
         ecog: ecog
@@ -87,7 +85,7 @@ function createTillsånd(datum, ecog){
     return tillsånd;
 }
 
-function createBehandling(typ, datum, oprationskoder = []){
+export function createBehandling(datum, typ, oprationskoder = []){
     
     oprationskoder = typ === Behandling.KIRURGI ? oprationskoder : [];
      
@@ -100,5 +98,13 @@ function createBehandling(typ, datum, oprationskoder = []){
     return behandling;
 }
 
+export function tryAddPatient(patient, setPatienter){
+    if(patient  !== undefined ){
+        setPatienter(prev => prev.some(p => p.personNr === patient.personNr) ? prev:[...prev, patient]);
+    }
+}
 
-export {Behandling,DiagnosGrund,createPatient, createDiagnos, createTillsånd, createBehandling};
+export function getPatienter(){
+    return window.inca.patiente;
+}
+

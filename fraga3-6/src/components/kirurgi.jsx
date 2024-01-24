@@ -28,14 +28,14 @@ function removeList(index, setState){
 }
 
 
-function codeForm(code, index, setState, disable){
+function codeForm(code, index, setState, disable, DoOnChange){
     return(
     <InputGroup hasValidation className="mb-3" key={index}>
 
         <FloatingLabel controlId="floatingInput" label="Oprations kod">
             <Form.Control required pattern = "[a-zA-zåäöÅÄÖ]{2}[0-9]{4}"  
                           disabled={disable} type="input" maxLength={6} 
-                          value={disable ? '' : code} onChange={(e) => updateList(index, e.target.value, setState)} />
+                          value={disable ? '' : code} onChange={(e) => {updateList(index, e.target.value, setState); DoOnChange()}} />
             
             <Form.Control.Feedback type="invalid">
                 Please provide a valid code(two letter followed by 4 digits).
@@ -44,7 +44,7 @@ function codeForm(code, index, setState, disable){
 
 
         <Button variant="outline-danger" id="button-addon" 
-                onClick={(e) => removeList(index, setState)}>
+                onClick={(e) => {removeList(index, setState); DoOnChange()}}>
           Remove
         </Button>
         
@@ -53,7 +53,7 @@ function codeForm(code, index, setState, disable){
 }
 
     
-function OprationsKod(codes, setCodes, disable=true) {
+function OprationsKod(codes, setCodes, DoOnChange, disable=true) {
 
     return (
       
@@ -63,14 +63,15 @@ function OprationsKod(codes, setCodes, disable=true) {
             <Form.Label>Codes (only for Kirugi):</Form.Label>
                 {
                     codes.map((code, index) => {
-                        return codeForm(code, index, setCodes, disable);
+                        return codeForm(code, index, setCodes, disable, DoOnChange);
                     })
                 }
             </Form.Group>
 
             
             <Form.Group  controlId="formOprationKodNy">
-                <Button variant="primary"  disabled={disable} onClick={() => setCodes(prev => [...prev,''])}>Add Code</Button>
+                <Button variant="primary"  disabled={disable} onClick={() => {setCodes(prev => [...prev,'']); 
+                                                                              DoOnChange()}}>Add Code</Button>
             </Form.Group>
         </Form.Group>
     );     
