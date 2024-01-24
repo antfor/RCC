@@ -2,7 +2,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import FormSelect from 'react-bootstrap/FormSelect'
 import {createDiagnos, DiagnosGrund} from './fråga3.mjs';
 import update from 'immutability-helper';
 
@@ -17,7 +16,7 @@ function getGrundOptions(){
 }
 
 
-function save(patient, setPatienter, grund, date, index = -1){
+function save(patient, setPatienter, grund, date){
 
     let updateAndSave = (upp) => {
         window.inca.patienter = upp();
@@ -26,16 +25,8 @@ function save(patient, setPatienter, grund, date, index = -1){
 
     let diagnos = createDiagnos(date.toDateString(), grund);
     
-    if(index === -1){
-        setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {diagnoser: {$push: [diagnos]}}})));
-    }else{
-        setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {diagnoser: {[index]: {$set: diagnos}}}})));
-    }
-
-    //alert('grund: ' + grund + ' date: '+ date.toDateString());
+    setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {diagnoser: {$push: [diagnos]}}})));
 }
-
-let oldPatient = -1;
 
 
 function DiagnosForm(patient, setPatienter, startDate = new Date(), diagnosGrund = DiagnosGrund.PAD, index=-1) {

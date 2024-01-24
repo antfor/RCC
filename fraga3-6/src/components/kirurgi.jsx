@@ -1,10 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import React, { useState } from "react";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import InputGroup from 'react-bootstrap/InputGroup';
-import DatePicker from "react-datepicker";
-import FormSelect from 'react-bootstrap/FormSelect'
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -38,7 +35,7 @@ function codeForm(code, index, setState, disable, DoOnChange){
                           value={disable ? '' : code} onChange={(e) => {updateList(index, e.target.value, setState); DoOnChange()}} />
             
             <Form.Control.Feedback type="invalid">
-                Please provide a valid code(two letter followed by 4 digits).
+                Please provide a valid code(2 letter followed by 4 digits).
             </Form.Control.Feedback>
         </FloatingLabel>
 
@@ -56,7 +53,6 @@ function codeForm(code, index, setState, disable, DoOnChange){
 function OprationsKod(codes, setCodes, DoOnChange, disable=true) {
 
     return (
-      
         <Form.Group className="mb-3" controlId="formOprationKod" >
             <Form.Group controlId="formOprationKoder">
                 

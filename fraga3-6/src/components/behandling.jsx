@@ -21,23 +21,18 @@ function filterCodes(codes, disableCodes){
     return disableCodes ? []: codes.filter(Boolean);
 }
 
-function save(patient, setPatienter, typ, date, codes, diableCodes, index = -1){
+function save(patient, setPatienter, typ, date, codes, diableCodes){
 
     let filteredCodescodes = filterCodes(codes, diableCodes);
 
-    let updateAndSave = (upp) => {
-        window.inca.patienter = upp();
-        return(upp());
+    let updateAndSave = (deepcopy) => {
+        window.inca.patienter = deepcopy();
+        return(deepcopy());
     };
 
     let behandling = createBehandling(date.toDateString(), typ, filteredCodescodes);
     
-    if(index === -1){ 
-        setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {behandlingar: {$push: [behandling]}}})));
-    }else{ 
-        setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {behandlingar: {[index]: {$set: behandling}}}})));
-    }
- 
+    setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {behandlingar: {$push: [behandling]}}})));
 }
 
 

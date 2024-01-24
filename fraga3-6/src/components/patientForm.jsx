@@ -1,24 +1,15 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import InputGroup from 'react-bootstrap/InputGroup';
-
-import DiagnosForm from './diagnos.jsx';
-import TillståndForm from './tillstånd.jsx';
-import BehandlingForm from './behandling.jsx';
 import FormTabs from './tabs.jsx';
-import * as inca from './fråga3.mjs';
+import {createPatient,tryAddPatient} from './fråga3.mjs';
 
-function LoadPatient(){
 
-}
 function handleNyPatient(personnummer, setPatienter){
-  // todo validation
-  let nyPatient = inca.createPatient(personnummer);
-  inca.tryAddPatient(nyPatient, setPatienter);
+ 
+  let nyPatient = createPatient(personnummer);
+  tryAddPatient(nyPatient, setPatienter);
 
 }
 
@@ -73,7 +64,7 @@ function PatientForm() {
       }
       
       setValidated(true);
-    };
+  };
 
   noPationsExist = isEmpty(patienter);
  

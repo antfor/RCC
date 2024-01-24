@@ -2,10 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import FormSelect from 'react-bootstrap/FormSelect'
 import {createTillsånd} from './fråga3.mjs';
 import update from 'immutability-helper';
-
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -27,7 +25,7 @@ function radioRange(start, end, setRadioValue, selected, DoOnChange){
     return buttons;
 }
 
-function save(patient, setPatienter, ecog, date, index = -1){
+function save(patient, setPatienter, ecog, date){
 
     let updateAndSave = (upp) => {
         window.inca.patienter = upp();
@@ -36,13 +34,8 @@ function save(patient, setPatienter, ecog, date, index = -1){
 
     let tillStånd = createTillsånd(date.toDateString(), ecog);
     
-    if(index === -1){ 
-        setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {alltillsånd: {$push: [tillStånd]}}})));
-    }else{ 
-        setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {alltillsånd: {[index]: {$set: tillStånd}}}})));
-    }
-
-    //alert('ecog: ' + ecog + ' date: '+ date.toDateString());
+    setPatienter(prev => updateAndSave(() => update(prev, {[patient]: {alltillsånd: {$push: [tillStånd]}}})));
+   
 }
 
 function TillståndForm(patient, setPatienter, startDate = new Date(), Oldecog = 0) {
@@ -83,11 +76,9 @@ function TillståndForm(patient, setPatienter, startDate = new Date(), Oldecog =
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formTillståndRadio">
-                
                 <Form.Label>ECOG:</Form.Label>
                 <br/>
-                {radioRange(0,5,setECOG,ecog,() => toggleSave(false))}
-                
+                {radioRange(0,5,setECOG,ecog,() => toggleSave(false))} 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formTillståndSave">

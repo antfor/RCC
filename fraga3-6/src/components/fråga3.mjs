@@ -5,7 +5,6 @@ const IncaObject = {
     patienter // Array av patient objekt
 };
 
-
 const Patient = {
     personNr, 
     diagnoser, // Array av diagnos objekt
@@ -104,7 +103,4 @@ export function tryAddPatient(patient, setPatienter){
     }
 }
 
-export function getPatienter(){
-    return window.inca.patiente;
-}
 
