@@ -2,7 +2,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import FormSelect from 'react-bootstrap/FormSelect';
 import OprationsKod from './kirurgi.jsx';
 import {createBehandling, Behandling} from './fråga3.mjs';
 import update from 'immutability-helper';

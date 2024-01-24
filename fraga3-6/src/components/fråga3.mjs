@@ -13,17 +13,17 @@ const Patient = {
 };
 
 const diagnos = {
-    diagnosgrund,
+    diagnosgrund, // PAD, cytologi, röntgen, klinisk
     datum
 };
 
 const tillsånd = {
     datum,
-    ecog
+    ecog // 0-5
 };
 
 const behandling = {
-    typ,
+    typ,    // cytostatikabehandling, strålbehandling, kirurgi
     datum,
     oprationskoder // Array av oprationskoder
 };

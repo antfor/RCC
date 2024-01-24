@@ -21,7 +21,7 @@ function getPatientOptions(patienter){
 }
 
 function isEmpty (array){
-  return array === undefined || array.length == 0;
+  return array === undefined || array.length === 0;
 }
 
 function getContent(patient, patienter, setPatienter){
@@ -29,7 +29,7 @@ function getContent(patient, patienter, setPatienter){
   let tabs = FormTabs(patient, patienter, setPatienter);
 
   if(noPationsExist){
-    return <h1>Lägg till en patient först</h1>
+    return <h1>Lägg till en patient</h1>
   }else{
     return tabs;
   }
@@ -72,7 +72,6 @@ function PatientForm() {
   return(
     <div>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-
         <Form.Label>Lägg till ny Patient:</Form.Label>
 
         <InputGroup hasValidation className="mb-3">
@@ -90,14 +89,13 @@ function PatientForm() {
       </Form>
 
       <Form>
-
         <Form.Label>Välj Patient:</Form.Label>
         <Form.Select disabled={noPationsExist} 
           onChange={e => {setPatientIndex(e.currentTarget.value);}}>
                     {getPatientOptions(patienter)}
         </Form.Select>
       </Form>
-   
+      <br/>
       {getContent(patientIndex, patienter, setPatienter)}
       
     </div>

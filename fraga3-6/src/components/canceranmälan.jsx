@@ -24,7 +24,6 @@ function Canceranmälan(patientIndex, patienter){
     let patient = patienter[patientIndex];
 
     useEffect(() => {
-        patient = patienter[patientIndex];
     },[patientIndex,patienter]);
 
     let noPatient = <h1>Finns ingen patient</h1>;

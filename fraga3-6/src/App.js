@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Card from 'react-bootstrap/Card';
-import React, { useState } from "react";
 import PatientForm from './components/patientForm.jsx';
 
 function App() {
