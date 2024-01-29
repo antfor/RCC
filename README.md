@@ -17,3 +17,7 @@ I fliken Canceranmälan kan du se patientens diagnosdatum och högsta Ecog värd
 
 Det finns validering för operationskoder och personnummr.
 Samt ska man inte kunna ge fel värden för de andra värderna. 
+
+
+The project is also hosted on my website: 
+    [https://anton-forsberg.com/projects/rcc/](https://anton-forsberg.com/projects/rcc/ 'this project on my website')
